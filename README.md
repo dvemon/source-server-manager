@@ -6,7 +6,7 @@ show real-time source server information on discord
 * player count
 * map name
 * player list with online time
-* simple csv database managing
+* simple csv db meme
 
 ### prerequisites
 you will need to install these modules:
