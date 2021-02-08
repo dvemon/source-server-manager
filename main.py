@@ -9,25 +9,25 @@ client.remove_command('help')
 
 @client.event
 async def on_ready():
-    print('Bot is online')
+    print('Logged in as: {0.user}'.format(client))
 
 @client.command()
+@commands.is_owner()
 async def load(ctx, extension):
-    if ctx.message.author.id == owner_id:
-        client.load_extension(f'cogs.{extension}')
-        await ctx.send(f'> Loaded {extension}.')
+    client.load_extension(f'cogs.{extension}')
+    await ctx.send(f'> Loaded {extension}.')
 
 @client.command()
+@commands.is_owner()
 async def unload(ctx, extension):
-    if ctx.message.author.id == owner_id:
-        client.unload_extension(f'cogs.{extension}')
-        await ctx.send(f'> Unloaded {extension}.')
+    client.unload_extension(f'cogs.{extension}')
+    await ctx.send(f'> Unloaded {extension}.')
 
 @client.command()
+@commands.is_owner()
 async def reload(ctx, extension):
-    if ctx.message.author.id == owner_id:
-        client.reload_extension(f'cogs.{extension}')
-        await ctx.send(f'> Reloaded {extension}.')
+    client.reload_extension(f'cogs.{extension}')
+    await ctx.send(f'> Reloaded {extension}.')
 
 def load_cogs():
     for filename in os.listdir('./cogs'):
@@ -37,10 +37,6 @@ def load_cogs():
 def has_perms(ctx):
     if ctx.message.author.guild_permissions.administrator or ctx.message.author.id == owner_id:
         return True
-
-    check = str(ctx.message.channel.type)
-    if check == 'private':
-        return False
 
     return False
     
